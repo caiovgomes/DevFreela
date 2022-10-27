@@ -14,6 +14,7 @@ namespace DevFreela.Application.Services.Implementations
     public class UserService : IUserService
     {
         private readonly DevFreelaDbContext _dbContext;
+
         public UserService(DevFreelaDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -23,6 +24,8 @@ namespace DevFreela.Application.Services.Implementations
             var user = new User(inputModel.FullName, inputModel.Email, inputModel.BirthDate);
 
             _dbContext.Users.Add(user);
+
+            _dbContext.SaveChanges();
 
             return user.Id;
         }
