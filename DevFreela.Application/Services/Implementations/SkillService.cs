@@ -27,6 +27,9 @@ namespace DevFreela.Application.Services.Implementations
 
                 return sqlConnection.Query<SkillViewModel>(script).ToList();
             }
+
+            // Com EF Core
+
             //var skills = _dbContext.Skills;
 
             //var skillsViewModel = skills
