@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace DevFreela.API.Controllers
 {
     [Route("api/users")]
+    [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;

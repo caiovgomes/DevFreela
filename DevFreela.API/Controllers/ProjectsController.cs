@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 namespace DevFreela.API.Controllers
 {
     [Route("api/projects")]
+    [ApiController]
     public class ProjectsController : ControllerBase
     {
         private readonly IProjectService _projectService;
