@@ -1,5 +1,6 @@
 ﻿using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Core.Entities;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using System;
@@ -12,19 +13,18 @@ namespace DevFreela.Application.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly DevFreelaDbContext _dbContext;
+        private readonly IUserRepository _userRepository;
 
-        public CreateUserCommandHandler(DevFreelaDbContext dbContext)
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User(request.FullName, request.Email, request.BirthDate);
 
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            await _userRepository.AddAsync(user);
 
             // ASYNC = quando faz uma requisição no banco de dados a sua thread vai ficar esperando essa resposta,
             // então ela fica inativa quando utliza o AWAIT você basicamente deleta essa operação de entrada e saida

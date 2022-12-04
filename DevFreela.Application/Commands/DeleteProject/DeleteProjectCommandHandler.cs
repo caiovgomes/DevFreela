@@ -1,5 +1,6 @@
 ﻿using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Core.Entities;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using System;
@@ -13,19 +14,19 @@ namespace DevFreela.Application.Commands.DeleteProject
 {
     public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, Unit>
     {
-        private readonly DevFreelaDbContext _dbContext;
+        private readonly IProjectRepository _projectRepository;
 
-        public DeleteProjectCommandHandler(DevFreelaDbContext dbContext)
+        public DeleteProjectCommandHandler(IProjectRepository projectRepository)
         {
-            _dbContext = dbContext;
+            _projectRepository = projectRepository;
         }
 
         public async Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == request.Id);
-
+            var project = await _projectRepository.GetByIdAsync(request.Id);
             project.Cancel();
-            await _dbContext.SaveChangesAsync();
+            
+            await _projectRepository.SaveChangesAsync();
 
             // ASYNC = quando faz uma requisição no banco de dados a sua thread vai ficar esperando essa resposta,
             // então ela fica inativa quando utliza o AWAIT você basicamente deleta essa operação de entrada e saida
