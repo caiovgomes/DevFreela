@@ -19,18 +19,3 @@ steps:
     inputs:
       command: 'test'
     displayName: 'Executando Testes'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(31b10b0a-56e7-4c50-ab02-ac9e4c165645)'
-    appType: 'webAppLinux'
-    WebAppName: 'devfreela-azure-devops'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'DOTNETCORE|6.0'
-
