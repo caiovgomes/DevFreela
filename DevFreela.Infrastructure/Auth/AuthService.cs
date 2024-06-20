@@ -1,5 +1,5 @@
-﻿using DevFreela.Core.Auth;
-using DevFreela.Core.Enums;
+﻿using DevFreela.Core.Enums;
+using DevFreela.Core.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

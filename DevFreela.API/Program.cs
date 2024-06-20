@@ -1,8 +1,11 @@
 using DevFreela.Application.Commands.CreateProject;
+using DevFreela.Application.Consumers;
 using DevFreela.Application.Validators;
-using DevFreela.Core.Auth;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using DevFreela.Infrastructure.Auth;
+using DevFreela.Infrastructure.MessageBus;
+using DevFreela.Infrastructure.Payments;
 using DevFreela.Infrastructure.Persistence;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using FluentValidation;
@@ -25,8 +28,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 #endregion
 
-#region Auth
+#region Service
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IMessageBusService, MessageBusService>();
+builder.Services.AddHostedService<PaymentApprovedConsumer>();
 #endregion
 
 #region FluentValidation
@@ -36,6 +42,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>
 
 
 // Add services to the container.
+
+builder.Services.AddHttpClient();
 
 //builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter))); //Filter Validation
 builder.Services.AddControllers();

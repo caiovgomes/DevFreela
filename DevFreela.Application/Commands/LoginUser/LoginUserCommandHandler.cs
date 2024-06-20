@@ -1,6 +1,6 @@
 ﻿using DevFreela.Application.ViewModels;
-using DevFreela.Core.Auth;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using MediatR;
 using System;

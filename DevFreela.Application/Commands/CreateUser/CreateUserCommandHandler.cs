@@ -1,7 +1,7 @@
 ﻿using DevFreela.Application.Commands.CreateProject;
-using DevFreela.Core.Auth;
 using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using System;

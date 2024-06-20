@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Core.Auth
+namespace DevFreela.Core.Services
 {
     public interface IAuthService
     {
